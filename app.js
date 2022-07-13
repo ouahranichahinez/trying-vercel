@@ -4,7 +4,7 @@ import bot from "./api/bot.js";
 
 app.use(json({ extended: false }));
 
-app.use("/api/product", bot);
+app.use("/api/bot", bot);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
