@@ -1,16 +1,16 @@
-import { Router } from "express";
-const router = Router();
+import puppeteer from "puppeteer";
+import chromium from "chrome-aws-lambda";
 
-router.get("/", async (req, res) => {
-  try {
-    res.json({
-      status: 200,
-      message: "Get data has successfully",
+export async function bot() {
+    const browser = await chromium.puppeteer.launch({
+        args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: true,
+        ignoreHTTPSErrors: true,
     });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Server error");
-  }
-});
-
-export default router;
+    const page = await browser.newPage();
+    await page.goto("https://www.youtube.com/", { waituntil: "networkidle2" });
+    console.log("everything is ok");
+    await browser.close();
+}

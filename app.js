@@ -1,10 +1,12 @@
-import express, { json } from "express";
-const app = express();
-import bot from "./api/bot.js";
+import express from "express";
+import { bot } from "./api/bot.js";
 
-app.use(json({ extended: false }));
+export const app = express();
+app.get("/", async (req, res) => {
+    await bot();
+    res.send("you are finished, see you next time :) .");
+});
 
-app.use("/api/bot", bot);
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+app.listen(5000, () => {
+    console.log("Running on port 5000.");
+});
