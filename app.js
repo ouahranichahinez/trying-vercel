@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 app.get("/", async (req, res) => {
     await bot();
     res.send("you are finished, see you next time :) .");
-});
+}); 
 */
 
 app.listen(port, () => {
